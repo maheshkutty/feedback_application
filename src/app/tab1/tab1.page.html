@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Registeration
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +13,250 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <form [formGroup]="regForms" (ngSubmit)="addStudents()" novalidate>
+    <ion-label><h1 class="maintext">Student Registration</h1></ion-label>
+    <ion-item>
+      <ion-label position="stacked" class="inputLabel">Full Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+      <div
+        *ngIf="errorControl.name.invalid && (errorControl.name.dirty || errorControl.name.touched)"
+      >
+        <span class="error" *ngIf="errorControl.name.errors?.required">
+          Name is required.
+        </span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" class="inputLabel">Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+      <div
+        *ngIf="errorControl.email.invalid && (errorControl.email.dirty || errorControl.email.touched)"
+      >
+        <span class="error" *ngIf="errorControl.name.errors?.required">
+          Email is required.
+        </span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" class="inputLabel">Contact No</ion-label>
+      <ion-input type="text" formControlName="phoneno"></ion-input>
+      <div
+        *ngIf="errorControl.phoneno.invalid && (errorControl.phoneno.dirty || errorControl.phoneno.touched)"
+      >
+        <span class="error" *ngIf="errorControl.name.errors?.required">
+          Contact No is required.
+        </span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" class="inputLabel">Roll No</ion-label>
+      <ion-input type="text" formControlName="rollno"></ion-input>
+      <div
+        *ngIf="errorControl.rollno.invalid && (errorControl.rollno.dirty || errorControl.rollno.touched)"
+      >
+        <span class="error" *ngIf="errorControl.rollno.errors?.required">
+          Roll No is required.
+        </span>
+      </div>
+    </ion-item>
+    <div class="accrConatiner" (click)="showHSCDetails()">
+      <p>HSC Details</p>
+      <div *ngIf="accordInput.hscStyle == 'panel'">
+        <ion-icon slot="end" name="add" class="iconStyle"></ion-icon>
+      </div>
+      <div *ngIf="accordInput.hscStyle == 'panalActive'">
+        <ion-icon slot="end" name="remove" class="iconStyle"></ion-icon>
+      </div>
+    </div>
+    <div [class]="accordInput.hscStyle">
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">College Name</ion-label>
+        <ion-input type="text" formControlName="hclgname"></ion-input>
+        <div
+          *ngIf="errorControl.hclgname.invalid && (errorControl.hclgname.dirty || errorControl.hclgname.touched)"
+        >
+          <span class="error" *ngIf="errorControl.name.errors?.required">
+            College name is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Year of passing</ion-label>
+        <ion-datetime
+          displayFormat="YYYY"
+          formControlName="hyearpassing"
+        ></ion-datetime>
+        <div
+          *ngIf="errorControl.hyearpassing.invalid && (errorControl.hyearpassing.dirty || errorControl.hyearpassing.touched)"
+        >
+          <span class="error" *ngIf="errorControl.name.errors?.required">
+            YOP is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Marks</ion-label>
+        <ion-input type="text" formControlName="hmarks" (ionBlur)="makePercentage('hsc')"></ion-input>
+        <div
+          *ngIf="errorControl.hmarks.invalid && (errorControl.hmarks.dirty || errorControl.hmarks.touched)"
+        >
+          <span class="error" *ngIf="errorControl.hmarks.errors?.required">
+            Marks is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel" >Total Marks</ion-label>
+        <ion-input type="text" formControlName="houtof" (ionBlur)="makePercentage('hsc')"></ion-input>
+        <div
+          *ngIf="errorControl.houtof.invalid && (errorControl.houtof.dirty || errorControl.houtof.touched)"
+        >
+          <span class="error" *ngIf="errorControl.houtof.errors?.required">
+            Total Marks is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Percentage</ion-label>
+        <!-- <ion-input type="text" formControlName="hpercentage" disabled></ion-input> -->
+        <ion-input type="text" formControlName="hpercentage"></ion-input>
+      </ion-item>
+    </div>
+    <div class="accrConatiner" (click)="showSSCDetails()">
+      <p>SSC Details</p>
+      <div *ngIf="accordInput.sscStyle == 'panel'">
+        <ion-icon slot="end" name="add" class="iconStyle"></ion-icon>
+      </div>
+      <div *ngIf="accordInput.sscStyle == 'panalActive'">
+        <ion-icon slot="end" name="remove" class="iconStyle"></ion-icon>
+      </div>
+    </div>
+    <div [class]="accordInput.sscStyle">
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">School Name</ion-label>
+        <ion-input type="text" formControlName="sclgname"></ion-input>
+        <div
+          *ngIf="errorControl.sclgname.invalid && (errorControl.sclgname.dirty || errorControl.sclgname.touched)"
+        >
+          <span class="error" *ngIf="errorControl.name.errors?.required">
+            School Name is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Year of passing</ion-label>
+        <ion-datetime
+          displayFormat="YYYY"
+          formControlName="syearpassing"
+        ></ion-datetime>
+        <div
+          *ngIf="errorControl.syearpassing.invalid && (errorControl.name.dirty || errorControl.syearpassing.touched)"
+        >
+          <span class="error" *ngIf="errorControl.name.errors?.required">
+            YOP is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Marks</ion-label>
+        <ion-input type="text" formControlName="smarks" (ionBlur)="makePercentage('ssc')"></ion-input>
+        <div
+          *ngIf="errorControl.smarks.invalid && (errorControl.smarks.dirty || errorControl.smarks.touched)"
+        >
+          <span class="error" *ngIf="errorControl.smarks.errors?.required">
+            Marks is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Total Marks</ion-label>
+        <ion-input type="text" formControlName="soutof" (ionBlur)="makePercentage('ssc')"></ion-input>
+        <div
+          *ngIf="errorControl.soutof.invalid && (errorControl.soutof.dirty || errorControl.soutof.touched)"
+        >
+          <span class="error" *ngIf="errorControl.soutof.errors?.required">
+            Total Marks is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Percentage</ion-label>
+        <!-- <ion-input type="text" formControlName="spercentage" disabled></ion-input> -->
+        <ion-input type="text" formControlName="spercentage"></ion-input>
+      </ion-item>
+    </div>
+    <div class="accrConatiner" (click)="showGradDetails()">
+      <p>Gradution Details</p>
+      <div *ngIf="accordInput.graduationStyle == 'panel'">
+        <ion-icon slot="end" name="add" class="iconStyle"></ion-icon>
+      </div>
+      <div *ngIf="accordInput.graduationStyle == 'panalActive'">
+        <ion-icon slot="end" name="remove" class="iconStyle"></ion-icon>
+      </div>
+    </div>
+    <div [class]="accordInput.graduationStyle">
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">CGPI</ion-label>
+        <ion-input type="text" formControlName="cgpi" (ionBlur)="makePercentage('grad')"></ion-input>
+        <div
+          *ngIf="errorControl.cgpi.invalid && (errorControl.cgpi.dirty || errorControl.cgpi.touched)"
+        >
+          <span class="error" *ngIf="errorControl.cgpi.errors?.required">
+            CGPI is required.
+          </span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Percentage</ion-label>
+        <!-- <ion-input type="text" formControlName="gper" disabled></ion-input> -->
+        <ion-input type="text" formControlName="gper" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <!-- <input id="uploadBtn" type="file" class="upload" [(ngModel)]="filename" #resumefile/> -->
+        <input id="uploadBtn" type="file" class="upload" (change)="chooseFile($event)" fileControlName="filename" #resumefile/>
+        <!-- <div>
+          <ion-label class="inputLabel">Upload Resume</ion-label>
+          <ion-label class="inputLabel" style="color: red;">{{fname}}</ion-label>
+        </div> -->
+        <!-- <ion-button
+          (click)="uploadImage()"
+          expand="block"
+          slot="end"
+        >
+          Select file
+        </ion-button> -->
+      </ion-item>
+      <ion-button type="submit" expand="block" shape="round" class="submitbutton">
+        Submit
+      </ion-button>
+    </div>
+  </form>
+  <!-- <ion-button (click)="uploadResume()" expand="block" shape="round">
+    Upload Resume
+
+  </ion-button> -->
+  
+  <!-- <ion-button (click)="uploadResume()" expand="block" shape="round">
+    Click me
+  </ion-button> -->
+
+  <!-- <ion-button (click)="addStudents()">
+    Add Students
+  </ion-button>
+  <ion-button (click)="getStudent()">
+    Get Students id
+  </ion-button>
+  <ion-button (click)="deleteStudent()" expand="block" shape="round">
+    Delete Student
+  </ion-button>
+  <ion-button (click)="getAllStudents()" expand="block"  shape="round">
+    Get Students
+  </ion-button>
+  <ion-button (click)="updateStudent()" expand="block" shape="round">
+    Update Students
+  </ion-button>
+  <ion-button (click)="uploadResume()" expand="block" shape="round">
+    Upload Resume
+  </ion-button>
+  <input type="file" placeholder="choose resume" [(ngModel)]="fileName" #resumefile> -->
 </ion-content>

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile View</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="userdata1['name'] == ''" class="container">
+    <ion-label>You are not register yet !!!!!!!!!!!!!!</ion-label>
+  </div>
+  <div *ngIf="userdata1['name'] != ''">
+    <ion-button (click)="editStudent()" expand="block">
+      Edit
+    </ion-button>
+    <p class="subSec">Personal Details</p>
+    <div *ngFor="let item of userdata1['allLabel']" class="col">
+      <p class="type">{{item.label}}</p>
+      <p class="value">{{userdata1[item.value]}}</p>
+    </div>
+    <div>
+      <p class="subSec">HSC Details</p>
+    </div>
+    <div *ngFor="let item of userdata1['hsclabel']" class="col">
+      <p class="type">{{item.label}}</p>
+      <p class="value" *ngIf="item.value !== 'hyearpassing'">{{userdata1[item.value]}}</p>
+      <ion-datetime class="value" *ngIf="item.value === 'hyearpassing'" displayFormat="YYYY" [value]="userdata1[item.value]"></ion-datetime>
+    </div>
+    <p class="subSec">SSC Details</p>
+    <div *ngFor="let item of userdata1['ssclabel']" class="col">
+      <p class="type">{{item.label}}</p>
+      <p class="value" *ngIf="item.value !== 'syearpassing'">{{userdata1[item.value]}}</p>
+      <ion-datetime class="value" *ngIf="item.value === 'syearpassing'" displayFormat="YYYY" [value]="userdata1[item.value]"></ion-datetime>
+    </div>
+    <p class="subSec">Gradution Details</p>
+    <div *ngFor="let item of userdata1['gradLabel']" class="col">
+      <p class="type">{{item.label}}</p>
+      <p class="value">{{userdata1[item.value]}}</p>
+    </div>
+  </div>
+  <div style="display:flex; margin-left:1em; align-items: center;">
+    <ion-icon name="attach" class="iconStyle"></ion-icon>
+    <ion-button (click)="openDocument()" fill="clear"> Show Resume</ion-button>
+  </div>
+</ion-content>

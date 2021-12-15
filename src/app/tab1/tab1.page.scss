@@ -1,0 +1,79 @@
+.accrConatiner {
+    background-color: rgba(0,50,106,0.80);
+    color: white;
+    cursor: pointer;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+    font-weight: bold;
+    p{
+      margin-left: 1em; 
+    }
+  }
+  
+  .accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin-top: 1em;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active,
+  .accordion:hover {
+    background-color: #ccc;
+  }
+  
+  /* Style the accordion panel. Note: hidden by default */
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+  }
+  
+  .panalActive {
+    background-color: white;
+    display: block;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  
+  .iconStyle {
+    font-size: 25px;
+    margin-right: 1em;
+    font-weight: bold;
+  }
+  
+  
+  .inputLabel{
+    --color:rgba(0,50,106,0.80);
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .error{
+    color:red;
+    font-size: 15px;
+    margin-bottom: 0.5em;
+  }
+  
+  .submitbutton{
+    --background: rgba(0,50,106,0.80);
+  }
+  
+  .maintext{
+    text-align: center;
+    font-size: 30px;
+    color: rgba(0,50,106,0.80);
+    margin: 0.5rem;
+    font-weight: bold;
+  }

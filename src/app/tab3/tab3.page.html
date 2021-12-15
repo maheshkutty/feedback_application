@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title> Feedback </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +11,69 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-label><p class="maintext">Feedback Form</p></ion-label>
+  <form [formGroup]="feedbackForm" (ngSubmit)="postFeedback()" novalidate>
+    <ion-item>
+      <ion-label position="floating" class="inputLabel">Name</ion-label>
+      <ion-input formControlName="name" required></ion-input>
+      <div
+        *ngIf="errorControl.name.invalid && (errorControl.name.dirty || errorControl.name.touched)"
+      >
+        <span class="error" *ngIf="errorControl.name.errors?.required">
+          Name is required.
+        </span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" class="inputLabel">Email</ion-label>
+      <ion-input formControlName="email" required></ion-input>
+      <div *ngIf="errorControl.email.invalid && (email.dirty || email.touched)">
+        <span class="error" *ngIf="errorControl.email.errors?.required">
+          Email is required.
+        </span>
+        <span class="error" *ngIf="errorControl.email.errors?.pattern">
+          Not a valid email
+        </span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" class="inputLabel">Subject</ion-label>
+      <ion-input
+        placeholder="Event Name"
+        formControlName="ename"
+        required
+      ></ion-input>
+      <div
+        *ngIf="errorControl.name.invalid && (errorControl.name.dirty || errorControl.name.touched)"
+      >
+        <span class="error" *ngIf="errorControl.ename.errors?.required">
+          Event Name is required.
+        </span>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" style="margin-bottom: 25px" class="inputLabel"
+        >Rating</ion-label
+      >
+      <app-rating [(rating)]="rating"></app-rating>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" class="inputLabel">Comments</ion-label>
+      <ion-textarea
+        formControlName="comments"
+        autoGrow="true"
+        required
+      ></ion-textarea>
+      <div
+        *ngIf="errorControl.name.invalid && (errorControl.name.dirty || errorControl.name.touched)"
+      >
+        <span class="error" *ngIf="errorControl.comments.errors?.required">
+          Comments is required.
+        </span>
+      </div>
+    </ion-item>
+    <!-- <div> -->
+    <ion-button type="submit" expand="block">Submit</ion-button>
+    <!-- </div> -->
+  </form>
 </ion-content>

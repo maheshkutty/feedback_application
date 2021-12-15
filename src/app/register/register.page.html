@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list class="lStyle">
+    <h1 style="text-align: center;">Register</h1>
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input type="password" [(ngModel)]="passsword"></ion-input>
+    </ion-item>
+    
+      <ion-button (click)="registerUser()" expand="block"  shape="round">
+        Register
+      </ion-button>
+  </ion-list>
+  <div class="footerContainer">
+    <ion-label>Or Sign In</ion-label>
+    <div class="emailConatiner" (click)="goToLogin()">
+      <ion-icon name="mail"></ion-icon>
+      <span>Email</span>
+    </div>
+  </div>
+</ion-content>

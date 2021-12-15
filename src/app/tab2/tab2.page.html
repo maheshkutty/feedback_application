@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Show Data
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +13,29 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-segment [value]="segmentChooser" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="sdata">
+      <ion-label>Profile</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="fdata">
+      <ion-label>Feed back</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div *ngIf="segmentChooser == 'sdata'">
+    <ion-list>
+      <ion-item *ngFor="let item of sList">
+        <ion-label><p class="lpara">{{item.name}}</p></ion-label>
+        <ion-icon name="open-outline"(click)="showStudentInfo(item)" color="success"></ion-icon>
+        <ion-icon name="trash-outline" (click)="deleteStudentInfo(item.docid)" color="danger"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="segmentChooser == 'fdata'">
+    <ion-list>
+      <ion-item *ngFor="let item of fList">
+        <ion-label><p class="lpara">Name: {{item.name}}</p><p style="margin-top: 0.5em; font-size: 1em;">Rating: {{item.rate}}</p><p style="margin-top: 0.5em; font-size: 1em;">Subject: {{item.ename}}</p></ion-label>
+        <ion-icon name="trash-outline" color="danger" (click)="deleteFeedback(item.docid)"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
